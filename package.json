@@ -1,0 +1,12 @@
+{
+  "name": "framewerk",
+  "author": "Justin Toon",
+  "version": "0.1.0",
+  "description": "A framework for managing scripting on top of server-rendered pages.",
+  "main": "dist/index.js",
+  "keywords": [
+    "javascript",
+    "framework"
+  ],
+  "license": "MIT"
+}
