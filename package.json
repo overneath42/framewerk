@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "A framework for managing scripting on top of server-rendered pages.",
   "main": "dist/index.js",
+  "typings": "./typings.d.ts",
   "repository": "https://github.com/overneath42/framewerk.git",
   "keywords": [
     "javascript",

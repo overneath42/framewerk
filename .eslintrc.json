@@ -1,0 +1,43 @@
+{
+  "ecmaVersion": 7,
+  "extends": [
+    "semistandard",
+    "plugin:flowtype/recommended"
+  ],
+  "env": {
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "no-multi-spaces": [
+      "error",
+      {
+        "exceptions": {
+          "VariableDeclarator": true
+        }
+      }
+    ],
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-use-before-define": 0,
+    "space-before-function-paren": 0,
+    "operator-linebreak": 0,
+    "camelcase": 0,
+    "prefer-reflect": 0,
+    "flowtype/define-flow-type": 1
+  }
+}
