@@ -28,17 +28,19 @@ export default class Framewerk {
    *
    * @static
    * @since 0.1.0
-   * @memberof Framewerk
    */
-  static Controller = Controller;
+  static Controller() {
+    return Controller;
+  }
   /**
    * The {@link Plugin} class.
    *
    * @static
    * @since 0.1.0
-   * @memberof Framewerk
    */
-  static Plugin = Plugin;
+  static Plugin() {
+    return Plugin;
+  }
 
   /**
    * Initialize the Framewerk package.
