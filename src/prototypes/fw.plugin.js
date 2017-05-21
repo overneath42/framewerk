@@ -87,7 +87,7 @@ export class Plugin implements PluginInterface {
     if (target && this.foundElements(target, container)) {
       // if the plugin requires jQuery, we'll check to make sure
       // jQuery is defined, since this library does not add it.
-      if (this.isJQueryPlugin && window.jQuery !== 'undefined') {
+      if (this.isJQueryPlugin && typeof window.jQuery !== 'undefined') {
         target = window.jQuery(target);
       }
 
