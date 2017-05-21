@@ -22,6 +22,7 @@ export class Plugin implements PluginInterface {
   instanceOptions: Object;
   isJQueryPlugin: boolean;
   initialize: ?string => void;
+  callPlugin: (?string, ?string, ?(string | Object), ?Object) => void;
   execute: Function => void;
   isFunction: any => boolean;
   setOptions: ?Object => Object;
@@ -30,6 +31,7 @@ export class Plugin implements PluginInterface {
   /**
    * Creates a new {@link Plugin}.
    *
+   * @constructor
    * @property {Function} plugin The primary plugin entry.
    * @property {string} [container] A selector string for a container to instantiate the plugin within.
    * @property {string} [target] A selector string for a target to execute the plugin against.
@@ -50,10 +52,9 @@ export class Plugin implements PluginInterface {
    * Initializes the {@link Plugin}.
    *
    * @since 0.1.0
-   * @memberof Plugin
    */
   initialize(container?: string) {
-    this.callFunc(this.getContainer(container));
+    this.callPlugin(this.getContainer(container));
   }
 
   /**
@@ -61,7 +62,6 @@ export class Plugin implements PluginInterface {
    * and instance values will be used if one or the other is not provided.
    *
    * @since 0.1.0
-   * @memberof Plugin
    *
    * @param {string} [container] - A valid selector string to execute the plugin within.
    * @param {string} [target] - A valid selector string or element to execute the plugin against.
@@ -70,7 +70,7 @@ export class Plugin implements PluginInterface {
    *
    * @return {void}
    */
-  callFunc(
+  callPlugin(
     container?: string,
     target?: string,
     options?: string | Object,
@@ -126,7 +126,6 @@ export class Plugin implements PluginInterface {
    * Determine if a function actually is a function
    *
    * @since 0.1.0
-   * @memberof Plugin
    *
    * @param {any} object The object to test.
    *
@@ -140,7 +139,6 @@ export class Plugin implements PluginInterface {
    * Determine if the plugin target exists within the current view.
    *
    * @since 0.1.0
-   * @memberof Plugin
    *
    * @param  {string} selector - A valid selector string to target.
    * @param  {string} container - A valid selector string to search within.
@@ -180,7 +178,6 @@ export class Plugin implements PluginInterface {
    * the page body.
    *
    * @since 0.1.0
-   * @memberof Plugin
    *
    * @param {string} [container] A valid selector string.
    *
