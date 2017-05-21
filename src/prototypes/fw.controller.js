@@ -7,14 +7,15 @@
  * @license MIT
  */
 
+import ControllerApi from '../apis/fw.controller-api';
+
 /**
  * A generic prototype for creating a function which will
  * execute scripting within a specified container.
  *
- * @class Controller
  * @since 0.1.0
  */
-export class Controller implements ControllerInterface {
+export class Controller implements Controller$Interface {
   name: string;
   selectors: ConfigObject;
   events: MethodObject;
@@ -32,7 +33,7 @@ export class Controller implements ControllerInterface {
    * @param {Object} methods - Methods to execute within the {@link Controller} container.
    * @param {string} [container] - Selector string of a container element to manage.
    */
-  constructor(props: ControllerInterface) {
+  constructor(props: Controller$Interface) {
     this.name = props.name;
     this.selectors = props.selectors || {};
     this.events = props.events || {};
@@ -44,10 +45,13 @@ export class Controller implements ControllerInterface {
    * Initialize the {@link Controller}.
    *
    * @since 0.1.0
-   * @memberof Controller
+   *
+   * @returns {ControllerApi} An API for interacting with the {@Controller}.
    */
-  initialize() {
+  initialize(): ControllerApi {
     this.createEvents();
+
+    return new ControllerApi();
   }
 
   /**
@@ -55,7 +59,6 @@ export class Controller implements ControllerInterface {
    *
    * @type {function}
    * @since 0.1.0
-   * @memberof Controller
    */
   createEvents() {
     Object.keys(this.events).forEach(key => {

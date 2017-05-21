@@ -7,14 +7,15 @@
  * @license MIT
  */
 
+import PluginApi from '../apis/fw.plugin-api';
+
 /**
  * A generic prototype for wrapping a third-party plugin to allow
  * for a common execution pattern.
  *
- * @class Plugin
  * @since 0.1.0
  */
-export class Plugin implements PluginInterface {
+export class Plugin implements Plugin$Interface {
   container: string;
   target: string;
   plugin: Function;
@@ -31,15 +32,14 @@ export class Plugin implements PluginInterface {
   /**
    * Creates a new {@link Plugin}.
    *
-   * @constructor
-   * @property {Function} plugin The primary plugin entry.
-   * @property {string} [container] A selector string for a container to instantiate the plugin within.
-   * @property {string} [target] A selector string for a target to execute the plugin against.
-   * @property {Object} [defaultOptions] Default options shared by all instances of the plugin.
-   * @property {Object} [instanceOptions] Options specific to the current instance.
-   * @property {boolean} [isJQueryPlugin] Whether or not the plugin requires jQuery.
+   * @param {Function} plugin The primary plugin entry.
+   * @param {string} [container] A selector string for a container to instantiate the plugin within.
+   * @param {string} [target] A selector string for a target to execute the plugin against.
+   * @param {Object} [defaultOptions] Default options shared by all instances of the plugin.
+   * @param {Object} [instanceOptions] Options specific to the current instance.
+   * @param {boolean} [isJQueryPlugin] Whether or not the plugin requires jQuery.
    */
-  constructor(props: PluginInterface) {
+  constructor(props: Plugin$Interface) {
     this.plugin = props.plugin;
     this.container = props.container || 'body';
     this.target = props.target || 'body';
@@ -52,9 +52,13 @@ export class Plugin implements PluginInterface {
    * Initializes the {@link Plugin}.
    *
    * @since 0.1.0
+   *
+   * @returns {PluginApi} An API for interacting with the {@link Plugin}.
    */
-  initialize(container?: string) {
-    this.callPlugin(this.getContainer(container));
+  initialize(): PluginApi {
+    this.callPlugin();
+
+    return new PluginApi();
   }
 
   /**
@@ -67,8 +71,6 @@ export class Plugin implements PluginInterface {
    * @param {string} [target] - A valid selector string or element to execute the plugin against.
    * @param {(string|Object)} [options] - Info to provide to the function call.
    * @param {Object} [params] - Additional parameters to provide.
-   *
-   * @return {void}
    */
   callPlugin(
     container?: string,
@@ -100,7 +102,6 @@ export class Plugin implements PluginInterface {
    * Attempts to execute a {@link Plugin} method. Catches and logs any exceptions.
    *
    * @since 0.1.0
-   * @memberof Plugin
    *
    * @param {Function} command The plugin method to execute.
    *
@@ -156,7 +157,6 @@ export class Plugin implements PluginInterface {
    * Merges default and user options.
    *
    * @since 0.1.0
-   * @memberof Plugin
    *
    * @param {Object} [options] Additional options.
    *

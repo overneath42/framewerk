@@ -20,7 +20,7 @@ interface PluginInterface {
 }
 
 declare namespace Framewerk {
-  class Controller implements ControllerInterface {
+  declare class Controller implements ControllerInterface {
     name: string;
     selectors: ConfigObject;
     events: MethodObject;
@@ -30,7 +30,7 @@ declare namespace Framewerk {
     createEvents(): void;
   }
 
-  class Plugin implements PluginInterface {
+  declare class Plugin implements PluginInterface {
     plugin: Function;
     container: string;
     target: string;
