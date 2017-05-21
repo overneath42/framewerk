@@ -20,6 +20,8 @@ export class Controller implements ControllerInterface {
   events: MethodObject;
   methods: MethodObject;
   container: string;
+  initialize: () => void;
+  createEvents: () => void;
 
   /**
    * Creates a new {@link Controller}.
@@ -39,11 +41,23 @@ export class Controller implements ControllerInterface {
   }
 
   /**
+   * Initialize the {@link Controller}.
+   *
+   * @since 0.1.0
+   * @memberof Controller
+   */
+  initialize() {
+    this.createEvents();
+  }
+
+  /**
    * Initialize all events provided to the {@link Controller}.
    *
    * @type {function}
+   * @since 0.1.0
+   * @memberof Controller
    */
-  initEvents() {
+  createEvents() {
     Object.keys(this.events).forEach(key => {
       try {
         this.events[key]();

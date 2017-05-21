@@ -48,6 +48,9 @@ export class Plugin implements PluginInterface {
 
   /**
    * Initializes the {@link Plugin}.
+   *
+   * @since 0.1.0
+   * @memberof Plugin
    */
   initialize(container?: string) {
     this.callFunc(this.getContainer(container));
@@ -56,6 +59,9 @@ export class Plugin implements PluginInterface {
   /**
    * Call the main {@link Plugin} function against a selector. All arguments are optional,
    * and instance values will be used if one or the other is not provided.
+   *
+   * @since 0.1.0
+   * @memberof Plugin
    *
    * @param {string} [container] - A valid selector string to execute the plugin within.
    * @param {string} [target] - A valid selector string or element to execute the plugin against.
@@ -81,7 +87,7 @@ export class Plugin implements PluginInterface {
     if (target && this.foundElements(target, container)) {
       // if the plugin requires jQuery, we'll check to make sure
       // jQuery is defined, since this library does not add it.
-      if (this.isJQueryPlugin && (window.jQuery !== 'undefined')) {
+      if (this.isJQueryPlugin && window.jQuery !== 'undefined') {
         target = window.jQuery(target);
       }
 
@@ -92,6 +98,9 @@ export class Plugin implements PluginInterface {
 
   /**
    * Attempts to execute a {@link Plugin} method. Catches and logs any exceptions.
+   *
+   * @since 0.1.0
+   * @memberof Plugin
    *
    * @param {Function} command The plugin method to execute.
    *
@@ -116,6 +125,9 @@ export class Plugin implements PluginInterface {
   /**
    * Determine if a function actually is a function
    *
+   * @since 0.1.0
+   * @memberof Plugin
+   *
    * @param {any} object The object to test.
    *
    * @return {boolean}
@@ -126,6 +138,9 @@ export class Plugin implements PluginInterface {
 
   /**
    * Determine if the plugin target exists within the current view.
+   *
+   * @since 0.1.0
+   * @memberof Plugin
    *
    * @param  {string} selector - A valid selector string to target.
    * @param  {string} container - A valid selector string to search within.
@@ -141,6 +156,9 @@ export class Plugin implements PluginInterface {
 
   /**
    * Merges default and user options.
+   *
+   * @since 0.1.0
+   * @memberof Plugin
    *
    * @param {Object} [options] Additional options.
    *
@@ -160,6 +178,9 @@ export class Plugin implements PluginInterface {
    * the plugin. Will return the instance container if
    * no argument is provided, ultimately falling back to
    * the page body.
+   *
+   * @since 0.1.0
+   * @memberof Plugin
    *
    * @param {string} [container] A valid selector string.
    *
