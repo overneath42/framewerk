@@ -15,19 +15,13 @@ import PluginApi from '../apis/fw.plugin-api';
  *
  * @since 0.1.0
  */
-export class Plugin implements Plugin$Interface {
+export default class Plugin implements Plugin$Interface {
   container: string;
   target: string;
   plugin: Function;
   defaultOptions: Object;
   instanceOptions: Object;
   isJQueryPlugin: boolean;
-  initialize: ?string => void;
-  callPlugin: (?string, ?string, ?(string | Object), ?Object) => void;
-  execute: Function => void;
-  isFunction: any => boolean;
-  setOptions: ?Object => Object;
-  getContainer: ?string => string;
 
   /**
    * Creates a new {@link Plugin}.
@@ -49,6 +43,51 @@ export class Plugin implements Plugin$Interface {
   }
 
   /**
+   * Determine if any instances of target element are located
+   * within a given container element.
+   *
+   * @static
+   * @param {string} selector The selector string to query for.
+   * @param {HTMLElement} container The container to search within.
+   *
+   * @returns {boolean}
+   */
+  static foundElements(selector: string, container: HTMLElement): boolean {
+    if (!selector) return false;
+
+    return container.querySelectorAll(selector).length > 0;
+  }
+
+  /**
+   * Determine if a function actually is a function
+   *
+   * @since 0.1.0
+   *
+   * @static
+   * @param {*} object The object to test.
+   *
+   * @return {boolean}
+   */
+  static isFunction(object: any): boolean {
+    return typeof object === 'function';
+  }
+
+/**
+   * Merges default and user options.
+   *
+   * @since 0.1.0
+   *
+   * @static
+   * @param {Object} [defaultOptions = {}] Default options.
+   * @param {Object} [instanceOptions] Instance options.
+   *
+   * @returns {Object} The merged options object.
+   */
+  static prepareOptions(defaultOptions: Object = {}, instanceOptions: Object = {}): Object {
+    return Object.assign(defaultOptions, instanceOptions);
+  }
+
+  /**
    * Initializes the {@link Plugin}.
    *
    * @since 0.1.0
@@ -56,46 +95,12 @@ export class Plugin implements Plugin$Interface {
    * @returns {PluginApi} An API for interacting with the {@link Plugin}.
    */
   initialize(): PluginApi {
-    this.callPlugin();
-
-    return new PluginApi();
-  }
-
-  /**
-   * Call the main {@link Plugin} function against a selector. All arguments are optional,
-   * and instance values will be used if one or the other is not provided.
-   *
-   * @since 0.1.0
-   *
-   * @param {string} [container] - A valid selector string to execute the plugin within.
-   * @param {string} [target] - A valid selector string or element to execute the plugin against.
-   * @param {(string|Object)} [options] - Info to provide to the function call.
-   * @param {Object} [params] - Additional parameters to provide.
-   */
-  callPlugin(
-    container?: string,
-    target?: string,
-    options?: string | Object,
-    params?: Object
-  ) {
-    container = this.getContainer(container);
-    target = target || this.target;
-    options = options || this.instanceOptions;
-
-    if (typeof options === 'object') {
-      options = this.setOptions(options);
-    }
-
-    if (target && this.foundElements(target, container)) {
-      // if the plugin requires jQuery, we'll check to make sure
-      // jQuery is defined, since this library does not add it.
-      if (this.isJQueryPlugin && typeof window.jQuery !== 'undefined') {
-        target = window.jQuery(target);
-      }
-
-      const args = [].concat([target], [options], params ? [params] : []);
-      this.execute(this.plugin(...args));
-    }
+    return new PluginApi({
+      container: document.querySelector(this.container),
+      target: this.target,
+      plugin: this.plugin,
+      defaultOptions: Object
+    });
   }
 
   /**
@@ -121,69 +126,5 @@ export class Plugin implements Plugin$Interface {
         console.debug(error);
       }
     }
-  }
-
-  /**
-   * Determine if a function actually is a function
-   *
-   * @since 0.1.0
-   *
-   * @param {any} object The object to test.
-   *
-   * @return {boolean}
-   */
-  isFunction(object: any): boolean {
-    return typeof object === 'function';
-  }
-
-  /**
-   * Determine if the plugin target exists within the current view.
-   *
-   * @since 0.1.0
-   *
-   * @param  {string} selector - A valid selector string to target.
-   * @param  {string} container - A valid selector string to search within.
-   *
-   * @returns {boolean}
-   */
-  foundElements(selector: string, container?: string): boolean {
-    if (!selector) return false;
-
-    container = container || this.container;
-    return document.querySelectorAll(selector).length > 0;
-  }
-
-  /**
-   * Merges default and user options.
-   *
-   * @since 0.1.0
-   *
-   * @param {Object} [options] Additional options.
-   *
-   * @returns {Object} The merged options object.
-   */
-  setOptions(options: ?Object): Object {
-    return Object.assign(
-      {},
-      this.defaultOptions,
-      this.instanceOptions,
-      options || {}
-    );
-  }
-
-  /**
-   * Get the target container in which to execute
-   * the plugin. Will return the instance container if
-   * no argument is provided, ultimately falling back to
-   * the page body.
-   *
-   * @since 0.1.0
-   *
-   * @param {string} [container] A valid selector string.
-   *
-   * @returns {string}
-   */
-  getContainer(container: ?string): string {
-    return container || this.container || 'body';
   }
 }

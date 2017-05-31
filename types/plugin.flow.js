@@ -8,5 +8,8 @@ declare interface Plugin$Interface {
 }
 
 declare interface Plugin$Api {
-
+  container: ?HTMLElement;
+  target: string;
+  plugin: Function;
+  defaultOptions: ?Object;
 }
