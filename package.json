@@ -24,6 +24,7 @@
     "eslint-config-semistandard": "^11.0.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-flowtype": "^2.33.0",
+    "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "flow-bin": "^0.46.0",
@@ -33,5 +34,8 @@
     "semistandard": "^11.0.0",
     "standard": "^10.0.2",
     "unflowify": "^1.0.1"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }

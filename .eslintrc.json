@@ -5,11 +5,13 @@
     "plugin:flowtype/recommended"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "jest/globals": true
   },
   "parser": "babel-eslint",
   "plugins": [
-    "flowtype"
+    "flowtype",
+    "jest"
   ],
   "rules": {
     "indent": [
@@ -38,6 +40,10 @@
     "operator-linebreak": 0,
     "camelcase": 0,
     "prefer-reflect": 0,
-    "flowtype/define-flow-type": 1
+    "flowtype/define-flow-type": 1,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error"
   }
 }

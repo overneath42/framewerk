@@ -42,6 +42,25 @@ export class Controller implements Controller$Interface {
   }
 
   /**
+   * Initialize a set of functions to create event listeners.
+   *
+   * @static
+   * @param {Object} events An object of functions which will add event listeners when called.
+   */
+  static initEventListeners(events: MethodObject) {
+    Object.keys(events).forEach(key => {
+      try {
+        // attempt to initialize the event
+        events[key]();
+      } catch (error) {
+        // if it fails, log the event and continue
+        console.debug(error);
+        return false;
+      }
+    });
+  }
+
+  /**
    * Initialize the {@link Controller}.
    *
    * @since 0.1.0
@@ -49,25 +68,7 @@ export class Controller implements Controller$Interface {
    * @returns {ControllerApi} An API for interacting with the {@Controller}.
    */
   initialize(): ControllerApi {
-    this.createEvents();
-
+    Controller.initEventListeners(this.events);
     return new ControllerApi();
-  }
-
-  /**
-   * Initialize all events provided to the {@link Controller}.
-   *
-   * @type {function}
-   * @since 0.1.0
-   */
-  createEvents() {
-    Object.keys(this.events).forEach(key => {
-      try {
-        this.events[key]();
-      } catch (error) {
-        // this organization can and will tolerate failure
-        return false;
-      }
-    });
   }
 }
