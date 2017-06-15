@@ -15,7 +15,7 @@ import PluginApi from '../apis/fw.plugin-api';
  *
  * @since 0.1.0
  */
-export default class Plugin implements Plugin$Interface {
+export default class Plugin implements Framewerk.Plugin {
   container: string;
   target: string;
   plugin: Function;
@@ -33,7 +33,7 @@ export default class Plugin implements Plugin$Interface {
    * @param {Object} [instanceOptions] Options specific to the current instance.
    * @param {boolean} [isJQueryPlugin] Whether or not the plugin requires jQuery.
    */
-  constructor(props: Plugin$Interface) {
+  constructor(props: Framewerk.PluginInterface) {
     this.plugin = props.plugin;
     this.container = props.container || 'body';
     this.target = props.target || 'body';

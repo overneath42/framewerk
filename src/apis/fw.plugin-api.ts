@@ -15,17 +15,17 @@ import Plugin from '../prototypes/fw.plugin';
  * @class PluginApi
  * @since 0.1.0
  */
-export default class PluginApi implements Plugin$Api {
-  container: ?HTMLElement;
+export default class PluginApi implements FramewerkApis.Plugin {
+  container?: HTMLElement;
   target: string;
   plugin: Function;
-  defaultOptions: ?Object;
+  defaultOptions?: Object;
 
   /**
    * Creates an instance of PluginApi.
    * @param {Plugin$Api} props
    */
-  constructor(props: Plugin$Api) {
+  constructor(props: Framewerk.IPlugin) {
     this.container = props.container;
     this.target = props.target;
     this.plugin = props.plugin;

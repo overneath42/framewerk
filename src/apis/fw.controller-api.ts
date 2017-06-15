@@ -7,6 +7,8 @@
  * @license MIT
  */
 
+import Controller from '../prototypes/fw.controller';
+
 /**
  * @module framewerk/controller/api
  */
@@ -20,6 +22,6 @@
  * @since 0.1.0
  */
 
-export default class ControllerApi implements Controller$Api {
+export default class ControllerApi implements FramewerkApis.Controller {
 
 }

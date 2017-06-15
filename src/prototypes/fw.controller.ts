@@ -15,14 +15,13 @@ import ControllerApi from '../apis/fw.controller-api';
  *
  * @since 0.1.0
  */
-export class Controller implements Controller$Interface {
+export class Controller implements Framewerk.Controller {
   name: string;
   selectors: ConfigObject;
   events: MethodObject;
   methods: MethodObject;
   container: string;
-  initialize: () => void;
-  createEvents: () => void;
+  // initialize(): void;
 
   /**
    * Creates a new {@link Controller}.
@@ -33,7 +32,7 @@ export class Controller implements Controller$Interface {
    * @param {Object} methods - Methods to execute within the {@link Controller} container.
    * @param {string} [container] - Selector string of a container element to manage.
    */
-  constructor(props: Controller$Interface) {
+  constructor(props: Framewerk.IController) {
     this.name = props.name;
     this.selectors = props.selectors || {};
     this.events = props.events || {};
@@ -69,6 +68,7 @@ export class Controller implements Controller$Interface {
    */
   initialize(): ControllerApi {
     Controller.initEventListeners(this.events);
+
     return new ControllerApi();
   }
 }
