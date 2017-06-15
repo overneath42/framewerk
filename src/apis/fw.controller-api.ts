@@ -7,6 +7,8 @@
  * @license MIT
  */
 
+import Controller from '../prototypes/fw.controller';
+
 /**
  * @module framewerk/controller/api
  */

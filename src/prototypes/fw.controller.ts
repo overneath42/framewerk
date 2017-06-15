@@ -22,7 +22,6 @@ export class Controller implements Controller$Interface {
   methods: MethodObject;
   container: string;
   initialize: () => void;
-  createEvents: () => void;
 
   /**
    * Creates a new {@link Controller}.
