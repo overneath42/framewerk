@@ -18,10 +18,10 @@ import { Controller, Plugin } from './prototypes';
  * @class Framewerk
  * @since 0.1.0
  */
-export default class Framewerk implements FramewerkInterface {
+export default class Framewerk implements Framewerk {
   controllers: Controller[];
   plugins: Plugin[];
-  initialize: () => void;
+  initialize(): void;
 
   /**
    * The {@link Controller} class.

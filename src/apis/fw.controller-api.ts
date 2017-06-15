@@ -22,6 +22,6 @@ import Controller from '../prototypes/fw.controller';
  * @since 0.1.0
  */
 
-export default class ControllerApi implements Controller$Api {
+export default class ControllerApi implements FramewerkApis.Controller {
 
 }
