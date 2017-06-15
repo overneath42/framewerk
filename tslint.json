@@ -1,0 +1,9 @@
+{
+  "extends": "tslint-config-standard",
+   "rules": {
+    "semicolon": [true, "always"]
+   },
+   "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules"
+  ]
+}

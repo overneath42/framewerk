@@ -12,29 +12,15 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-env": "^1.5.0",
-    "babelify": "^7.3.0",
-    "browserify": "^14.3.0",
-    "eslint": "^3.19.0",
-    "eslint-config-semistandard": "^11.0.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-flowtype": "^2.33.0",
-    "eslint-plugin-jest": "^20.0.3",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.46.0",
     "jest": "^20.0.4",
     "jsdoc": "^3.4.3",
-    "jsdoc-babel": "^0.3.0",
     "semistandard": "^11.0.0",
     "standard": "^10.0.2",
     "ts-jest": "^20.0.6",
-    "unflowify": "^1.0.1"
+    "tslint": "^5.4.3",
+    "tslint-config-standard": "^6.0.1",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.3.4"
   },
   "jest": {
     "moduleFileExtensions": [
