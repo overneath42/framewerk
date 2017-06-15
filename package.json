@@ -33,9 +33,23 @@
     "jsdoc-babel": "^0.3.0",
     "semistandard": "^11.0.0",
     "standard": "^10.0.2",
+    "ts-jest": "^20.0.6",
     "unflowify": "^1.0.1"
   },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+  },
   "scripts": {
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "pretest": "npm run lint",
     "test": "jest"
   }
 }
