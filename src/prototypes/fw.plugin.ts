@@ -33,7 +33,7 @@ export default class Plugin implements Framewerk.Plugin {
    * @param {Object} [instanceOptions] Options specific to the current instance.
    * @param {boolean} [isJQueryPlugin] Whether or not the plugin requires jQuery.
    */
-  constructor(props: Framewerk.PluginInterface) {
+  constructor(props: Framewerk.IPlugin) {
     this.plugin = props.plugin;
     this.container = props.container || 'body';
     this.target = props.target || 'body';

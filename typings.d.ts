@@ -69,7 +69,7 @@ declare namespace FramewerkApis {
   }
 }
 
-interface Framewerk {
+interface IFramewerk {
   controllers: Framewerk.Controller[];
   plugins: Framewerk.Plugin[];
   initialize(): void;
