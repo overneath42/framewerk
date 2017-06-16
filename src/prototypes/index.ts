@@ -1,5 +1,3 @@
-/* @flow */
-
 /**
  * @file Central import file for Prototypes.
  *

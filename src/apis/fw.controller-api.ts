@@ -1,5 +1,3 @@
-/* @flow */
-
 /**
  * @file The public API for an initialized `Controller`.
  *

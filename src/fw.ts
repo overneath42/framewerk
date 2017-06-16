@@ -1,5 +1,3 @@
-/* @flow */
-
 /**
  * @file The primary entry for Framewerk.
  *

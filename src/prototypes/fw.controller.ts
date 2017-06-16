@@ -1,5 +1,3 @@
-/* @flow */
-
 /**
  * @file The prototype object for `Controller`.
  *
