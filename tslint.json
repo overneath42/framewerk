@@ -1,9 +1,10 @@
 {
   "extends": "tslint-config-standard",
-   "rules": {
-    "semicolon": [true, "always"]
-   },
-   "rulesDirectory": [
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ]
+  "rules": {
+    "semicolon": [true, "always"],
+    "space-before-function-paren": false,
+    "indent": [true, "spaces", 2],
+    "no-conditional-assignment": false
+  },
+  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"]
 }
