@@ -11,42 +11,47 @@ interface MethodObject {
   [key: string]: Function
 }
 
-interface Api {
+interface IApi {
 
 }
 
+type Container = HTMLElement | HTMLBodyElement;
+
 declare namespace Framewerk {
-  export interface IController {
-    name: string;
-    selectors: ConfigObject;
-    events: MethodObject;
-    methods: MethodObject;
-    container: string;
+  interface IPrototype {
+    name?: string;
+    container?: Container;
   }
 
-  export interface IPlugin {
+  export interface IController extends IPrototype {
+    selectors?: ConfigObject;
+    events?: MethodObject;
+    methods?: MethodObject;
+  }
+
+  export interface IPlugin extends IPrototype {
+    container?: Container;
     plugin: Function;
-    container: string;
-    target: string;
-    defaultOptions: Object;
-    instanceOptions: Object;
+    target: Container;
+    defaultOptions?: Object;
+    instanceOptions?: Object;
     isJQueryPlugin: boolean;
   }
 
   export class Controller implements IController {
+    container?: Container;
     name: string;
     selectors: ConfigObject;
     events: MethodObject;
     methods: MethodObject;
-    container: string;
     // initialize(): void;
     // createEvents(): void;
   }
 
   export class Plugin implements IPlugin {
+    container?: Container;
     plugin: Function;
-    container: string;
-    target: string;
+    target: Container;
     defaultOptions: Object;
     instanceOptions: Object;
     isJQueryPlugin: boolean;
@@ -60,11 +65,11 @@ declare namespace Framewerk {
 }
 
 declare namespace FramewerkApis {
-  export interface Controller extends Api {
-
+  export interface Controller extends IApi {
+    call(...params: string[]): void;
   }
 
-  export interface Plugin extends Api {
+  export interface Plugin extends IApi {
 
   }
 }
@@ -72,5 +77,4 @@ declare namespace FramewerkApis {
 interface IFramewerk {
   controllers: Framewerk.Controller[];
   plugins: Framewerk.Plugin[];
-  initialize(): void;
 }

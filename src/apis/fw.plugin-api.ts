@@ -5,7 +5,7 @@
  * @license MIT
  */
 
-import Plugin from '../prototypes/fw.plugin';
+import { Plugin } from '../prototypes/fw.plugin';
 
 /**
  * An API for executing methods against an instance of {@link Plugin}.

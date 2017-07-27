@@ -17,28 +17,24 @@ import { Controller, Plugin } from './prototypes';
  * @since 0.1.0
  */
 export default class Framewerk implements IFramewerk {
-  controllers: Controller[];
-  plugins: Plugin[];
-  initialize(): void;
-
   /**
    * The {@link Controller} class.
    *
    * @static
    * @since 0.1.0
    */
-  static Controller() {
-    return Controller;
-  }
+  public static Controller = Controller;
+
   /**
    * The {@link Plugin} class.
    *
    * @static
    * @since 0.1.0
    */
-  static Plugin() {
-    return Plugin;
-  }
+  public static Plugin = Plugin;
+
+  public controllers: Controller[];
+  public plugins: Plugin[];
 
   /**
    * Initialize the Framewerk package.
@@ -46,7 +42,9 @@ export default class Framewerk implements IFramewerk {
    * @since 0.1.0
    * @todo Make this do something
    */
-  initialize() {
+  public initialize() {
+    [].slice.call(this.controllers).forEach(element => {
 
+    });
   }
 }
