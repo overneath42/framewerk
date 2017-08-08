@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.2] - 2017-08-08
+### Changed
+- Bug fix to `Controller.getTargets` method
+
 ## [0.1.1] - 2017-08-08
 ### Changed
 - Minor tweak to handling of `targets` within `Controller`.
