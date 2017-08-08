@@ -17,7 +17,7 @@ import { dataSelector } from '../utils/fw.utils';
 export class Controller {
   public container?: fw.Container;
   public name: string;
-  public targets: fw.NodeListObject<HTMLElement>;
+  public targets: fw.TargetsObject;
   public events: fw.MethodObject;
   public methods: fw.MethodObject;
 
@@ -42,25 +42,52 @@ export class Controller {
    * Convert a named list of selector strings into NodeLists.
    *
    * @static
-   * @param {string} name The lookup name to query for selectors.
    * @param {(string | ConfigObject)} [targets] Predefined targets.
    *
    * @returns {Object}
    */
   public static getTargets(
     targets?: fw.ConfigObject
-  ): fw.NodeListObject<HTMLElement> {
-    let selectedElements: fw.NodeListObject<HTMLElement> = {};
+  ): fw.TargetsObject {
+    let selectedElements: fw.TargetsObject = {};
 
     if (targets) {
       Object.keys(targets).forEach((key: string) => {
-        selectedElements[key] = document.querySelectorAll(
+        const selected = document.querySelectorAll(
           targets[key] as string
         ) as NodeListOf<HTMLElement>;
+
+        selectedElements[key] =
+          selected.length === 1 ? selected.item(0) : [].slice.call(selected);
       });
     }
 
     return selectedElements;
+  }
+
+  /**
+   * Assigns an appropriate selector string to the {@link Controller}. Will
+   * choose the first option below which qualifies:
+   *
+   * 1. A specified container assigned to `props.container`
+   * 2. A `data-controller` selector based on `props.name`
+   * 3. `body`
+   *
+   * @static
+   * @param {Controller} [props] Controller properties.
+   *
+   * @returns {fw.Container}
+   */
+  private static assignContainer(props?: Controller): fw.Container {
+    if (props.container) {
+      return props.container;
+    } else if (props.name) {
+      return document.querySelector(
+        dataSelector('controller', props.name)
+      ) as HTMLElement;
+    } else {
+      return document.querySelector('body');
+    }
   }
 
   /**
@@ -80,31 +107,6 @@ export class Controller {
         return false;
       }
     });
-  }
-
-  /**
-   * Assigns an appropriate selector string to the {@link Controller}. Will
-   * choose the first option below which qualifies:
-   *
-   * 1. A specified container assigned to `props.container`
-   * 2. A `data-controller` selector based on `props.name`
-   * 3. `body`
-   *
-   * @static
-   * @param {Framewerk.IController} props Controller properties.
-   *
-   * @returns {string}
-   */
-  private static assignContainer(props: Controller): fw.Container {
-    if (props.container) {
-      return props.container;
-    } else if (props.name) {
-      return document.querySelector(
-        dataSelector('controller', props.name)
-      ) as HTMLElement;
-    } else {
-      return document.querySelector('body');
-    }
   }
 
   /**
