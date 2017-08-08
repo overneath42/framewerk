@@ -15,9 +15,9 @@ import { dataSelector } from '../utils/fw.utils';
  * @since 0.1.0
  */
 export class Controller {
-  container?: fw.Container;
+  public container?: fw.Container;
   public name: string;
-  public targets: fw.ConfigObject;
+  public targets: fw.NodeListObject<HTMLElement>;
   public events: fw.MethodObject;
   public methods: fw.MethodObject;
 
@@ -116,13 +116,12 @@ export class Controller {
    */
   public initialize(): ControllerApi {
     const { container, events, targets, methods } = this;
-    const targetElements = Controller.getTargets(targets);
 
     Controller.initEventListeners(events);
 
     return new ControllerApi({
       container,
-      targetElements,
+      targets,
       methods
     });
   }

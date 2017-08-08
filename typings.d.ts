@@ -13,7 +13,7 @@ declare module 'framewerk' {
 
     container?: fw.Container;
     name: string;
-    targets: fw.ConfigObject;
+    targets: fw.NodeListObject<HTMLElement>;
     events: fw.MethodObject;
     methods: fw.MethodObject;
 
@@ -92,8 +92,7 @@ declare namespace fw {
   }
 
   interface IController extends IPrototype {
-    targets?: ConfigObject;
-    targetElements?: NodeListObject<HTMLElement>;
+    targets?: fw.NodeListObject<HTMLElement>;
     events?: MethodObject;
     methods?: MethodObject;
   }
