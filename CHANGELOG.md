@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.1] - 2017-08-08
+### Changed
+- Minor tweak to handling of `targets` within `Controller`.
+
 ## [0.1.0] - 2017-08-08
 ### Added
 - Core prototypes for `Controller` and `Plugin`
