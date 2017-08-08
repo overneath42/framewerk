@@ -9,6 +9,7 @@
  */
 
 import { Controller, Plugin } from './prototypes';
+import { dataSelector } from './utils/fw.utils';
 
 interface ControllerList {
   [key: string]: () => Controller;
@@ -37,7 +38,12 @@ function fw(controllers: ControllerList, plugins: Plugin[]) {
 
     if (controllerKeys.length) {
       controllerKeys.forEach(name => {
-        controllers[name]().initialize();
+        const selector = dataSelector('controller', name);
+        const container = document.querySelector(selector);
+
+        if (container) {
+          controllers[name]().initialize();
+        }
       });
     }
   }
