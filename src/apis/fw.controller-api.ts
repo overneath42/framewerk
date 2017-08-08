@@ -16,11 +16,11 @@ import { Controller } from '../prototypes/fw.controller';
  */
 
 export default class ControllerApi {
-  public targetElements: fw.NodeListObject<HTMLElement>;
+  public targets: fw.NodeListObject<HTMLElement>;
   public methods: fw.MethodObject;
 
   constructor(props: fw.IController) {
-    this.targetElements = props.targetElements;
+    this.targets = props.targets;
     this.methods = props.methods;
   }
 
