@@ -53,10 +53,10 @@ export class Controller {
     let selectedElements: fw.NodeListObject<HTMLElement> = {};
 
     if (targets) {
-      [].slice.call(targets).forEach((target: string, key: string) => {
-        selectedElements[key] = document.querySelectorAll(target) as NodeListOf<
-          HTMLElement
-        >;
+      Object.keys(targets).forEach((key: string) => {
+        selectedElements[key] = document.querySelectorAll(
+          targets[key] as string
+        ) as NodeListOf<HTMLElement>;
       });
     }
 
