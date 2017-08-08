@@ -3,37 +3,64 @@
 // Definitions by: Justin Toon <http://justintoon.com>
 // TypeScript Version: 2.4.2
 
-declare namespace fw {
-  interface IPrototype {
-    name?: string;
-    container?: Container;
+declare module 'framewerk' {
+  interface ControllerList {
+    [key: string]: () => Controller;
   }
 
-  interface IController extends IPrototype {
-    targets?: NodeListObject<HTMLElement>;
-    events?: MethodObject;
-    methods?: MethodObject;
+  class Controller implements fw.IController {
+    constructor(props: fw.IController);
+
+    container?: fw.Container;
+    name: string;
+    targets: fw.ConfigObject;
+    events: fw.MethodObject;
+    methods: fw.MethodObject;
+
+    static getTargets(
+      targets?: fw.ConfigObject
+    ): fw.NodeListObject<HTMLElement>;
+    initialize(): void;
+    createEvents(): void;
   }
 
-  interface IPlugin extends IPrototype {
+  class Plugin implements fw.IPlugin {
+    constructor(props: fw.IPlugin);
+
+    container?: fw.Container;
     plugin: Function;
-    target: Container;
-    defaultOptions?: Object;
-    instanceOptions?: Object;
+    target: fw.Container;
+    defaultOptions: fw.ConfigObject;
+    instanceOptions: fw.ConfigObject;
     isJQueryPlugin: boolean;
+
+    static foundElements(selector: string, container: HTMLElement): boolean;
+    private static prepareOptions(
+      defaultOptions: fw.ConfigObject,
+      instanceOptions: fw.ConfigObject
+    ): fw.ConfigObject;
+    private static isFunction(object: any): boolean;
+
+    initialize(): void;
   }
 
-  interface IApi {
-    container: Container
+  class ControllerApi {
+    constructor(props: fw.IController);
+
+    container: fw.Container;
+    targetElements: fw.NodeListObject<HTMLElement>;
+    methods: fw.MethodObject;
+
+    call(...parms: string[]): void;
+    private getMethod(key: string): () => any;
   }
 
-  interface IControllerApi extends IApi {
-    targets: NodeListObject<HTMLElement>;
-    methods?: MethodObject
-  }
+  class PluginApi {
+    constructor(props: fw.IPlugin);
 
-  interface IPluginApi extends IApi {
+    container: fw.Container;
 
+    callPlugin(): void;
   }
 
   function fw(
@@ -42,6 +69,9 @@ declare namespace fw {
   ): {
     initialize(): void;
   };
+}
+
+declare namespace fw {
   type Container = HTMLElement | HTMLBodyElement;
 
   interface ConfigObject {
@@ -56,73 +86,23 @@ declare namespace fw {
     [key: string]: NodeListOf<T>;
   }
 
-  interface ControllerList {
-    [key: string]: () => fw.Controller;
-  }
-
-  class Framewerk {
-    constructor(controllers?: ControllerList, plugins?: Plugin[]);
-    static Controller: Controller;
-    static Plugin: Plugin;
-    controllers?: ControllerList;
-    plugins?: Plugin[];
-    initialize(): void;
-  }
-
-  class Controller implements IController {
-    constructor(props: IController);
-
+  interface IPrototype {
+    name?: string;
     container?: Container;
-    name: string;
-    targets: NodeListObject<HTMLElement>;
-    events: MethodObject;
-    methods: MethodObject;
-
-    static getTargets(targets?: ConfigObject): NodeListObject<HTMLElement>;
-    initialize(): void;
-    createEvents(): void;
   }
 
-  class Plugin implements IPlugin {
-    constructor(props: IPlugin);
+  interface IController extends IPrototype {
+    targets?: ConfigObject;
+    targetElements?: NodeListObject<HTMLElement>;
+    events?: MethodObject;
+    methods?: MethodObject;
+  }
 
-    container?: Container;
+  interface IPlugin extends IPrototype {
     plugin: Function;
     target: Container;
-    defaultOptions: ConfigObject;
-    instanceOptions: ConfigObject;
+    defaultOptions?: Object;
+    instanceOptions?: Object;
     isJQueryPlugin: boolean;
-
-    static foundElements(selector: string, container: HTMLElement): boolean;
-    private static prepareOptions(
-      defaultOptions: ConfigObject,
-      instanceOptions: ConfigObject
-    ): ConfigObject;
-    private static isFunction(object: any): boolean;
-
-    initialize(): void;
   }
-
-  class ControllerApi implements IControllerApi {
-    constructor(props: IController);
-
-    container: Container;
-    targets: NodeListObject<HTMLElement>;
-    methods: MethodObject;
-
-    call(...parms: string[]): void;
-    private getMethod(key: string): () => any;
-  }
-
-  class PluginApi implements IPluginApi {
-    constructor(props: IPlugin);
-
-    container: Container;
-
-    callPlugin(): void;
-  }
-}
-
-declare module 'framewerk' {
-  export = fw;
 }

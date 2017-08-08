@@ -1,5 +1,3 @@
-import { ConfigObject, MethodObject, NodeListObject, IController } from 'framewerk';
-
 /**
  * @file The public API for an initialized `Controller`.
  *
@@ -18,11 +16,11 @@ import { Controller } from '../prototypes/fw.controller';
  */
 
 export default class ControllerApi {
-  private targets: NodeListObject<HTMLElement>;
-  private methods: MethodObject;
+  public targetElements: fw.NodeListObject<HTMLElement>;
+  public methods: fw.MethodObject;
 
-  constructor(props: IController) {
-    this.targets = props.targets;
+  constructor(props: fw.IController) {
+    this.targetElements = props.targetElements;
     this.methods = props.methods;
   }
 

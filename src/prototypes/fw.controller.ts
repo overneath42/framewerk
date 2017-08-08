@@ -1,10 +1,3 @@
-import {
-  ConfigObject,
-  MethodObject,
-  NodeListObject,
-  Container
-} from 'framewerk';
-
 /**
  * @file The prototype object for `Controller`.
  *
@@ -22,11 +15,11 @@ import { dataSelector } from '../utils/fw.utils';
  * @since 0.1.0
  */
 export class Controller {
-  container?: Container;
+  container?: fw.Container;
   public name: string;
-  public targets: NodeListObject<HTMLElement>;
-  public events: MethodObject;
-  public methods: MethodObject;
+  public targets: fw.ConfigObject;
+  public events: fw.MethodObject;
+  public methods: fw.MethodObject;
 
   /**
    * Creates a new {@link Controller}.
@@ -55,9 +48,9 @@ export class Controller {
    * @returns {Object}
    */
   public static getTargets(
-    targets?: ConfigObject
-  ): NodeListObject<HTMLElement> {
-    let selectedElements: NodeListObject<HTMLElement> = {};
+    targets?: fw.ConfigObject
+  ): fw.NodeListObject<HTMLElement> {
+    let selectedElements: fw.NodeListObject<HTMLElement> = {};
 
     if (targets) {
       [].slice.call(targets).forEach((target: string, key: string) => {
@@ -76,7 +69,7 @@ export class Controller {
    * @static
    * @param {MethodObject} events An object of functions which will add event listeners when called.
    */
-  private static initEventListeners(events: MethodObject) {
+  private static initEventListeners(events: fw.MethodObject) {
     Object.keys(events).forEach(key => {
       try {
         // attempt to initialize the event
@@ -102,7 +95,7 @@ export class Controller {
    *
    * @returns {string}
    */
-  private static assignContainer(props: Controller): Container {
+  private static assignContainer(props: Controller): fw.Container {
     if (props.container) {
       return props.container;
     } else if (props.name) {
@@ -123,12 +116,13 @@ export class Controller {
    */
   public initialize(): ControllerApi {
     const { container, events, targets, methods } = this;
+    const targetElements = Controller.getTargets(targets);
 
     Controller.initEventListeners(events);
 
     return new ControllerApi({
       container,
-      targets,
+      targetElements,
       methods
     });
   }

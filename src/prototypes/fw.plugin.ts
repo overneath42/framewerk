@@ -1,5 +1,3 @@
-import { Container, ConfigObject, IPlugin } from 'framewerk';
-
 /**
  * @file The prototype object for `Plugin`.
  *
@@ -16,8 +14,8 @@ import PluginApi from '../apis/fw.plugin-api';
  * @since 0.1.0
  */
 export class Plugin {
-  public container: Container;
-  public target: Container;
+  public container: fw.Container;
+  public target: fw.Container;
   public plugin: Function;
   public defaultOptions: Object;
   public instanceOptions: Object;
@@ -33,7 +31,7 @@ export class Plugin {
    * @param {Object} [instanceOptions] Options specific to the current instance.
    * @param {boolean} [isJQueryPlugin] Whether or not the plugin requires jQuery.
    */
-  constructor(props: IPlugin) {
+  constructor(props: fw.IPlugin) {
     this.plugin = props.plugin;
     this.container = props.container || document.querySelector('body');
     this.target = props.container || document.querySelector('body');
@@ -57,15 +55,15 @@ export class Plugin {
    * @since 0.1.0
    *
    * @static
-   * @param {Fw.ConfigObject} [defaultOptions = {}] Default options.
-   * @param {Fw.ConfigObject} [instanceOptions = {}] Instance options.
+   * @param {fw.ConfigObject} [defaultOptions = {}] Default options.
+   * @param {fw.ConfigObject} [instanceOptions = {}] Instance options.
    *
-   * @returns {Fw.ConfigObject} Returns the merged options object.
+   * @returns {fw.ConfigObject} Returns the merged options object.
    */
   private static prepareOptions(
-    defaultOptions: ConfigObject = {},
-    instanceOptions: ConfigObject = {}
-  ): ConfigObject {
+    defaultOptions: fw.ConfigObject = {},
+    instanceOptions: fw.ConfigObject = {}
+  ): fw.ConfigObject {
     return Object.assign(defaultOptions, instanceOptions);
   }
 
