@@ -8,7 +8,5 @@
  * @requires ./fw.plugin.js:Plugin
  */
 
-import { Controller } from './fw.controller';
-import { Plugin } from './fw.plugin';
-
-export { Controller, Plugin };
+export { Controller } from './fw.controller';
+export { Plugin } from './fw.plugin';

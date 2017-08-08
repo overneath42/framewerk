@@ -1,3 +1,5 @@
+import { ConfigObject, MethodObject, NodeListObject, IController } from 'framewerk';
+
 /**
  * @file The public API for an initialized `Controller`.
  *
@@ -8,10 +10,6 @@
 import { Controller } from '../prototypes/fw.controller';
 
 /**
- * @module framewerk/controller/api
- */
-
-/**
  * An API for accessing properties and executing methods
  * within an instance of {@link Controller}.
  *
@@ -19,18 +17,16 @@ import { Controller } from '../prototypes/fw.controller';
  * @since 0.1.0
  */
 
-export default class ControllerApi implements FramewerkApis.Controller {
-  private selectors: ConfigObject;
+export default class ControllerApi {
+  private targets: NodeListObject<HTMLElement>;
   private methods: MethodObject;
 
-  constructor(props: Framewerk.IController) {
-    this.selectors = props.selectors;
+  constructor(props: IController) {
+    this.targets = props.targets;
     this.methods = props.methods;
   }
 
-  public call(...params: string[]) {
-
-  }
+  public call(...params: string[]) {}
 
   private getMethod(key: string) {
     return this.methods[key];

@@ -1,3 +1,5 @@
+import { Container, ConfigObject, IPlugin } from 'framewerk';
+
 /**
  * @file The prototype object for `Plugin`.
  *
@@ -13,13 +15,13 @@ import PluginApi from '../apis/fw.plugin-api';
  *
  * @since 0.1.0
  */
-export class Plugin implements Framewerk.Plugin {
-  container: Container;
-  target: Container;
-  plugin: Function;
-  defaultOptions: Object;
-  instanceOptions: Object;
-  isJQueryPlugin: boolean;
+export class Plugin {
+  public container: Container;
+  public target: Container;
+  public plugin: Function;
+  public defaultOptions: Object;
+  public instanceOptions: Object;
+  public isJQueryPlugin: boolean;
 
   /**
    * Creates a new {@link Plugin}.
@@ -31,7 +33,7 @@ export class Plugin implements Framewerk.Plugin {
    * @param {Object} [instanceOptions] Options specific to the current instance.
    * @param {boolean} [isJQueryPlugin] Whether or not the plugin requires jQuery.
    */
-  constructor(props: Framewerk.IPlugin) {
+  constructor(props: IPlugin) {
     this.plugin = props.plugin;
     this.container = props.container || document.querySelector('body');
     this.target = props.container || document.querySelector('body');
@@ -40,17 +42,7 @@ export class Plugin implements Framewerk.Plugin {
     this.isJQueryPlugin = props.isJQueryPlugin || false;
   }
 
-  /**
-   * Determine if any instances of target element are located
-   * within a given container element.
-   *
-   * @static
-   * @param {string} selector The selector string to query for.
-   * @param {HTMLElement} container The container to search within.
-   *
-   * @returns {boolean}
-   */
-  private static foundElements(
+  public static foundElements(
     selector: string,
     container: HTMLElement
   ): boolean {
@@ -65,15 +57,15 @@ export class Plugin implements Framewerk.Plugin {
    * @since 0.1.0
    *
    * @static
-   * @param {Object} [defaultOptions = {}] Default options.
-   * @param {Object} [instanceOptions] Instance options.
+   * @param {Fw.ConfigObject} [defaultOptions = {}] Default options.
+   * @param {Fw.ConfigObject} [instanceOptions = {}] Instance options.
    *
-   * @returns {Object} Returns the merged options object.
+   * @returns {Fw.ConfigObject} Returns the merged options object.
    */
   private static prepareOptions(
-    defaultOptions: Object = {},
-    instanceOptions: Object = {}
-  ): Object {
+    defaultOptions: ConfigObject = {},
+    instanceOptions: ConfigObject = {}
+  ): ConfigObject {
     return Object.assign(defaultOptions, instanceOptions);
   }
 
@@ -92,13 +84,24 @@ export class Plugin implements Framewerk.Plugin {
   }
 
   /**
+   * Determine if any instances of target element are located
+   * within a given container element.
+   *
+   * @static
+   * @param {string} selector The selector string to query for.
+   * @param {HTMLElement} container The container to search within.
+   *
+   * @returns {boolean}
+   */
+
+  /**
    * Initializes the {@link Plugin}.
    *
    * @since 0.1.0
    *
    * @returns {PluginApi} Returns an instance of the API for interacting with the {@link Plugin}.
    */
-  initialize(): PluginApi {
+  public initialize(): PluginApi {
     return new PluginApi({
       container: this.container,
       target: this.target,
@@ -115,7 +118,7 @@ export class Plugin implements Framewerk.Plugin {
    *
    * @param {Function} command The plugin method to execute.
    */
-  execute(command: Function) {
+  public execute(command: Function) {
     // make sure the provided command and the internally-initialized plugin
     // are both executable functions
     if ([this.plugin, command].every(Plugin.isFunction)) {

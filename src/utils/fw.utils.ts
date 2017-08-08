@@ -5,6 +5,8 @@
  * @license MIT
  */
 
+import { transform } from 'inflection';
+
 /**
  * Creates a selector string to target a specific data attribute.
  * Accepts an attribute value in _camelCase_ or _snake-case_ and transforms appropriately. If the value starts with `^`,
@@ -37,7 +39,7 @@ export function dataSelector(attr: string, value?: string): string {
   let operator: string = '=';
 
   if (attr.indexOf('-') === -1) {
-    attr = inflection.transform(attr, ['underscore', 'dasherize']);
+    attr = transform(attr, ['underscore', 'dasherize']);
   }
 
   if (value && value.startsWith('^')) {

@@ -1,3 +1,10 @@
+import {
+  ConfigObject,
+  MethodObject,
+  NodeListObject,
+  Container
+} from 'framewerk';
+
 /**
  * @file The prototype object for `Controller`.
  *
@@ -14,10 +21,10 @@ import { dataSelector } from '../utils/fw.utils';
  *
  * @since 0.1.0
  */
-export class Controller implements Framewerk.Controller {
+export class Controller {
   container?: Container;
   public name: string;
-  public selectors: ConfigObject;
+  public targets: NodeListObject<HTMLElement>;
   public events: MethodObject;
   public methods: MethodObject;
 
@@ -30,12 +37,37 @@ export class Controller implements Framewerk.Controller {
    * @param {Object} events - Functions to create event listeners.
    * @param {Object} methods - Methods to execute within the {@link Controller} container.
    */
-  constructor(props: Framewerk.IController) {
+  constructor(props: Controller) {
     this.container = Controller.assignContainer(props);
     this.name = props.name;
-    this.selectors = props.selectors || {};
+    this.targets = props.targets || {};
     this.events = props.events || {};
     this.methods = props.methods || {};
+  }
+
+  /**
+   * Convert a named list of selector strings into NodeLists.
+   *
+   * @static
+   * @param {string} name The lookup name to query for selectors.
+   * @param {(string | ConfigObject)} [targets] Predefined targets.
+   *
+   * @returns {Object}
+   */
+  public static getTargets(
+    targets?: ConfigObject
+  ): NodeListObject<HTMLElement> {
+    let selectedElements: NodeListObject<HTMLElement> = {};
+
+    if (targets) {
+      [].slice.call(targets).forEach((target: string, key: string) => {
+        selectedElements[key] = document.querySelectorAll(target) as NodeListOf<
+          HTMLElement
+        >;
+      });
+    }
+
+    return selectedElements;
   }
 
   /**
@@ -70,11 +102,13 @@ export class Controller implements Framewerk.Controller {
    *
    * @returns {string}
    */
-  private static assignContainer(props: Framewerk.IController): Container {
+  private static assignContainer(props: Controller): Container {
     if (props.container) {
       return props.container;
     } else if (props.name) {
-      return document.querySelector(dataSelector('controller', props.name)) as HTMLElement;
+      return document.querySelector(
+        dataSelector('controller', props.name)
+      ) as HTMLElement;
     } else {
       return document.querySelector('body');
     }
@@ -88,11 +122,14 @@ export class Controller implements Framewerk.Controller {
    * @returns {ControllerApi} An API for interacting with the {@Controller}.
    */
   public initialize(): ControllerApi {
-    Controller.initEventListeners(this.events);
+    const { container, events, targets, methods } = this;
+
+    Controller.initEventListeners(events);
 
     return new ControllerApi({
-      selectors: this.selectors,
-      methods: this.methods
+      container,
+      targets,
+      methods
     });
   }
 }

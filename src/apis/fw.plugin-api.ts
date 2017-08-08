@@ -1,3 +1,5 @@
+import { Container, IPlugin } from 'framewerk';
+
 /**
  * @file The public API for an initialized {@link Plugin}.
  *
@@ -13,9 +15,9 @@ import { Plugin } from '../prototypes/fw.plugin';
  * @class PluginApi
  * @since 0.1.0
  */
-export default class PluginApi implements FramewerkApis.Plugin {
+export default class PluginApi {
   container?: HTMLElement;
-  target: string;
+  target: Container;
   plugin: Function;
   defaultOptions?: Object;
 
@@ -23,7 +25,7 @@ export default class PluginApi implements FramewerkApis.Plugin {
    * Creates an instance of PluginApi.
    * @param {Plugin$Api} props
    */
-  constructor(props: Framewerk.IPlugin) {
+  constructor(props: IPlugin) {
     this.container = props.container;
     this.target = props.target;
     this.plugin = props.plugin;
@@ -33,9 +35,5 @@ export default class PluginApi implements FramewerkApis.Plugin {
   /**
    * Call the main {@link Plugin} function against a selector.
    */
-  callPlugin() {
-    if (this.container && Plugin.foundElements(this.target, this.container)) {
-
-    }
-  }
+  callPlugin() {}
 }

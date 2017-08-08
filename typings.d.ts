@@ -1,36 +1,21 @@
 // Type definitions for Framewerk 0.1.0
 // Project: https://github.com/overneath42/framewerk
 // Definitions by: Justin Toon <http://justintoon.com>
-// TypeScript Version: 2.3
+// TypeScript Version: 2.4.2
 
-interface ConfigObject {
-  [key: string]: string
-}
-
-interface MethodObject {
-  [key: string]: Function
-}
-
-interface IApi {
-
-}
-
-type Container = HTMLElement | HTMLBodyElement;
-
-declare namespace Framewerk {
+declare namespace fw {
   interface IPrototype {
     name?: string;
     container?: Container;
   }
 
-  export interface IController extends IPrototype {
-    selectors?: ConfigObject;
+  interface IController extends IPrototype {
+    targets?: NodeListObject<HTMLElement>;
     events?: MethodObject;
     methods?: MethodObject;
   }
 
-  export interface IPlugin extends IPrototype {
-    container?: Container;
+  interface IPlugin extends IPrototype {
     plugin: Function;
     target: Container;
     defaultOptions?: Object;
@@ -38,43 +23,100 @@ declare namespace Framewerk {
     isJQueryPlugin: boolean;
   }
 
-  export class Controller implements IController {
-    container?: Container;
-    name: string;
-    selectors: ConfigObject;
-    events: MethodObject;
-    methods: MethodObject;
-    // initialize(): void;
-    // createEvents(): void;
+  interface IApi {
+    container: Container
   }
 
-  export class Plugin implements IPlugin {
+  interface IControllerApi extends IApi {
+    targets: NodeListObject<HTMLElement>;
+    methods?: MethodObject
+  }
+
+  interface IPluginApi extends IApi {
+
+  }
+
+  type Container = HTMLElement | HTMLBodyElement;
+
+  interface ConfigObject {
+    [key: string]: string | Function;
+  }
+
+  interface MethodObject {
+    [key: string]: Function;
+  }
+
+  interface NodeListObject<T extends HTMLElement> {
+    [key: string]: NodeListOf<T>;
+  }
+
+  interface ControllerList {
+    [key: string]: () => fw.Controller;
+  }
+
+  class Framewerk {
+    constructor(controllers?: ControllerList, plugins?: Plugin[]);
+    static Controller: Controller;
+    static Plugin: Plugin;
+    controllers?: ControllerList;
+    plugins?: Plugin[];
+    initialize(): void;
+  }
+
+  class Controller implements IController {
+    constructor(props: IController);
+
+    container?: Container;
+    name: string;
+    targets: NodeListObject<HTMLElement>;
+    events: MethodObject;
+    methods: MethodObject;
+
+    static getTargets(targets?: ConfigObject): NodeListObject<HTMLElement>;
+    initialize(): void;
+    createEvents(): void;
+  }
+
+  class Plugin implements IPlugin {
+    constructor(props: IPlugin);
+
     container?: Container;
     plugin: Function;
     target: Container;
-    defaultOptions: Object;
-    instanceOptions: Object;
+    defaultOptions: ConfigObject;
+    instanceOptions: ConfigObject;
     isJQueryPlugin: boolean;
-    // initialize(container: string | undefined): void;
-    // callPlugin(container?: string, target?: string, options?: string | Object, params?: Object): void;
-    // execute(command: Function): void;
-    // isFunction(object: any): boolean;
-    // setOptions(options?: Object): Object;
-    // getContainer(container?: string): string;
- }
-}
 
-declare namespace FramewerkApis {
-  export interface Controller extends IApi {
-    call(...params: string[]): void;
+    static foundElements(selector: string, container: HTMLElement): boolean;
+    private static prepareOptions(
+      defaultOptions: ConfigObject,
+      instanceOptions: ConfigObject
+    ): ConfigObject;
+    private static isFunction(object: any): boolean;
+
+    initialize(): void;
   }
 
-  export interface Plugin extends IApi {
+  class ControllerApi implements IControllerApi {
+    constructor(props: IController);
 
+    container: Container;
+    targets: NodeListObject<HTMLElement>;
+    methods: MethodObject;
+
+    call(...parms: string[]): void;
+    private getMethod(key: string): () => any;
+  }
+
+  class PluginApi implements IPluginApi {
+    constructor(props: IPlugin);
+
+    container: Container;
+
+    callPlugin(): void;
   }
 }
 
-interface IFramewerk {
-  controllers: Framewerk.Controller[];
-  plugins: Framewerk.Plugin[];
+declare module 'framewerk' {
+  export = fw;
 }

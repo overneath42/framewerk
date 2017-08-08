@@ -1,3 +1,5 @@
+import { ControllerList } from 'framewerk';
+
 /**
  * @file The primary entry for Framewerk.
  *
@@ -16,7 +18,7 @@ import { Controller, Plugin } from './prototypes';
  * @class Framewerk
  * @since 0.1.0
  */
-export default class Framewerk implements IFramewerk {
+export default class Framewerk {
   /**
    * The {@link Controller} class.
    *
@@ -33,8 +35,26 @@ export default class Framewerk implements IFramewerk {
    */
   public static Plugin = Plugin;
 
-  public controllers: Controller[];
+  /**
+   * Controllers attached to the current Framewerk instance.
+   *
+   * @type {Fw.ControllerList}
+   * @since 0.1.0
+   */
+  public controllers: ControllerList;
+
+  /**
+   * Plugins attached to the current Framewerk instance.
+   *
+   * @type {Plugin[]}
+   * @since 0.1.0
+   */
   public plugins: Plugin[];
+
+  constructor(controllers?: ControllerList, plugins?: Plugin[]) {
+    this.controllers = controllers || {};
+    this.plugins = plugins || [];
+  }
 
   /**
    * Initialize the Framewerk package.
