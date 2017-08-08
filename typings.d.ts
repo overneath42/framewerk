@@ -13,13 +13,13 @@ declare module 'framewerk' {
 
     container?: fw.Container;
     name: string;
-    targets: fw.NodeListObject<HTMLElement>;
+    targets: fw.TargetsObject;
     events: fw.MethodObject;
     methods: fw.MethodObject;
 
     static getTargets(
       targets?: fw.ConfigObject
-    ): fw.NodeListObject<HTMLElement>;
+    ): fw.TargetsObject;
     initialize(): void;
     createEvents(): void;
   }
@@ -48,7 +48,7 @@ declare module 'framewerk' {
     constructor(props: fw.IController);
 
     container: fw.Container;
-    targetElements: fw.NodeListObject<HTMLElement>;
+    targets: fw.TargetsObject;
     methods: fw.MethodObject;
 
     call(...parms: string[]): void;
@@ -82,6 +82,10 @@ declare namespace fw {
     [key: string]: Function;
   }
 
+  interface TargetsObject {
+    [key: string]: HTMLElement | HTMLElement[];
+  }
+
   interface NodeListObject<T extends HTMLElement> {
     [key: string]: NodeListOf<T>;
   }
@@ -92,7 +96,7 @@ declare namespace fw {
   }
 
   interface IController extends IPrototype {
-    targets?: fw.NodeListObject<HTMLElement>;
+    targets?: TargetsObject;
     events?: MethodObject;
     methods?: MethodObject;
   }
