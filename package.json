@@ -14,8 +14,8 @@
   "dependencies": {
     "inflection": "^1.12.0"
   },
+  "dependencies": {},
   "devDependencies": {
-    "@types/inflection": "^1.5.28",
     "jest": "^20.0.4",
     "jsdoc": "^3.4.3",
     "semistandard": "^11.0.0",

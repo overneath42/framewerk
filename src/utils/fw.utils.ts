@@ -5,8 +5,6 @@
  * @license MIT
  */
 
-import { transform } from 'inflection';
-
 /**
  * Creates a selector string to target a specific data attribute.
  * Accepts an attribute value in _camelCase_ or _snake-case_ and transforms appropriately. If the value starts with `^`,
@@ -39,7 +37,7 @@ export function dataSelector(attr: string, value?: string): string {
   let operator: string = '=';
 
   if (attr.indexOf('-') === -1) {
-    attr = transform(attr, ['underscore', 'dasherize']);
+    attr = camelToSnake(attr);
   }
 
   if (value && value.startsWith('^')) {
@@ -48,4 +46,21 @@ export function dataSelector(attr: string, value?: string): string {
   }
 
   return `[${attr}${operator}"${value}"]`;
+}
+
+/**
+ * Converts a string from camelCase to snake-case.
+ *
+ * @example
+ * // returns 'sample-attribute-name'
+ * camelToSnake('sampleAttributeName);
+ *
+ * @see https://jamesroberts.name/blog/2010/02/22/string-functions-for-javascript-trim-to-camel-case-to-dashed-and-to-underscore/
+ *
+ * @param {string} str The string to transform.
+ *
+ * @return Returns the transformed string.
+ */
+export function camelToSnake(str: string) {
+  return str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
 }

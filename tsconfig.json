@@ -15,10 +15,7 @@
         "sourceMap": false,
         "strictNullChecks": false,
         "outDir": "./dist",
-        "target": "es5",
-        "types": [
-            "inflection"
-        ]
+        "target": "es5"
     },
     "compileOnSave": false
 }
