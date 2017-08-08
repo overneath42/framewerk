@@ -36,6 +36,12 @@ declare namespace fw {
 
   }
 
+  function fw(
+    controllers?: ControllerList,
+    plugins?: Plugin[]
+  ): {
+    initialize(): void;
+  };
   type Container = HTMLElement | HTMLBodyElement;
 
   interface ConfigObject {

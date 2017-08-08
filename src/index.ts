@@ -1,5 +1,3 @@
-import { ControllerList } from 'framewerk';
-
 /**
  * @file The primary entry for Framewerk.
  *
@@ -12,62 +10,37 @@ import { ControllerList } from 'framewerk';
 
 import { Controller, Plugin } from './prototypes';
 
+interface ControllerList {
+  [key: string]: () => Controller;
+}
+
 /**
  * A framework for managing scripting on top of server-rendered pages.
  *
  * @class Framewerk
  * @since 0.1.0
  */
-export default class Framewerk {
-  /**
-   * The {@link Controller} class.
-   *
-   * @static
-   * @since 0.1.0
-   */
-  public static Controller = Controller;
+function fw(controllers: ControllerList, plugins: Plugin[]) {
+  return {
+    initialize
+  };
 
-  /**
-   * The {@link Plugin} class.
-   *
-   * @static
-   * @since 0.1.0
-   */
-  public static Plugin = Plugin;
-
-  /**
-   * Controllers attached to the current Framewerk instance.
-   *
-   * @type {Fw.ControllerList}
-   * @since 0.1.0
-   */
-  public controllers: ControllerList;
-
-  /**
-   * Plugins attached to the current Framewerk instance.
-   *
-   * @type {Plugin[]}
-   * @since 0.1.0
-   */
-  public plugins: Plugin[];
-
-  constructor(controllers?: ControllerList, plugins?: Plugin[]) {
-    this.controllers = controllers || {};
-    this.plugins = plugins || [];
-  }
+  ////////////
 
   /**
    * Initialize the Framewerk package.
    *
    * @since 0.1.0
    */
-  public initialize() {
-    const controllerKeys = Object.keys(this.controllers);
+  function initialize() {
+    const controllerKeys = Object.keys(controllers);
 
     if (controllerKeys.length) {
       controllerKeys.forEach(name => {
-        this.controllers[name]().initialize();
+        controllers[name]().initialize();
       });
     }
   }
 }
+
+export { fw, Controller, Plugin };
