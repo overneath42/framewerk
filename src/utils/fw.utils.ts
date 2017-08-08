@@ -45,7 +45,7 @@ export function dataSelector(attr: string, value?: string): string {
     value = value.slice(1);
   }
 
-  return `[${attr}${operator}"${value}"]`;
+  return `[data-${attr}${operator}"${value}"]`;
 }
 
 /**
