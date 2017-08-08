@@ -60,11 +60,14 @@ export default class Framewerk {
    * Initialize the Framewerk package.
    *
    * @since 0.1.0
-   * @todo Make this do something
    */
   public initialize() {
-    [].slice.call(this.controllers).forEach(element => {
+    const controllerKeys = Object.keys(this.controllers);
 
-    });
+    if (controllerKeys.length) {
+      controllerKeys.forEach(name => {
+        this.controllers[name]().initialize();
+      });
+    }
   }
 }
