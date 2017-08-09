@@ -34,6 +34,7 @@
     "tslint": "^5.4.3",
     "tslint-config-standard": "^6.0.1",
     "tslint-eslint-rules": "^4.1.1",
+    "typedoc": "^0.8.0",
     "typescript": "^2.3.4",
     "webpack": "^3.4.1",
     "webpack-livereload-plugin": "^0.11.0",
@@ -43,6 +44,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "pretest": "npm run lint",
     "test": "mocha",
+    "docs": "rimraf ./docs && typedoc --out docs/ src/ --name 'Framewerk' --readme README.md --target ES5",
     "dev": "webpack --config ./config/webpack.dev.ts",
     "build": "rimraf ./dist && webpack --config ./config/webpack.prod.ts"
   },
