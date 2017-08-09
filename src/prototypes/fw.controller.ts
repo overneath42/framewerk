@@ -46,9 +46,7 @@ export class Controller {
    *
    * @returns {Object}
    */
-  public static getTargets(
-    targets?: fw.ConfigObject
-  ): fw.TargetsObject {
+  public static getTargets(targets?: fw.ConfigObject): fw.TargetsObject {
     let selectedElements: fw.TargetsObject = {};
 
     if (targets) {

@@ -13,7 +13,11 @@ const config = function(): webpack.Configuration {
       filename: 'fw.min.js'
     },
     plugins: [
-      new webpack.optimize.UglifyJsPlugin({ compress: true, comments: false, mangle: false })
+      new webpack.optimize.UglifyJsPlugin({
+        compress: true,
+        comments: false,
+        mangle: false
+      })
     ]
   });
 };
