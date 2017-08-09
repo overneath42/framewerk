@@ -16,7 +16,7 @@ import { Controller } from '../prototypes/fw.controller';
  */
 
 export default class ControllerApi {
-  public targets: fw.NodeListObject<HTMLElement>;
+  public targets: fw.TargetsObject;
   public methods: fw.MethodObject;
 
   constructor(props: fw.IController) {
