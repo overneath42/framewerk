@@ -14,7 +14,7 @@ declare module 'framewerk' {
     container?: fw.Container;
     name: string;
     targets: fw.TargetsObject;
-    events: fw.MethodObject;
+    events?: fw.MethodObject;
     methods: fw.MethodObject;
 
     static getTargets(
@@ -91,12 +91,12 @@ declare namespace fw {
   }
 
   interface IPrototype {
-    name?: string;
     container?: Container;
   }
 
   interface IController extends IPrototype {
-    targets?: TargetsObject;
+    name: string;
+    targets: TargetsObject;
     events?: MethodObject;
     methods?: MethodObject;
   }
