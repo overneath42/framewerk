@@ -24,15 +24,15 @@ export class Controller {
   /**
    * Creates a new {@link Controller}.
    *
-   * @param {string} [container] - Selector string of a container element to manage.
-   * @param {string} name - The name of the Controller.
-   * @param {Object} selectors - Selector strings to use within the controller.
-   * @param {Object} events - Functions to create event listeners.
-   * @param {Object} methods - Methods to execute within the {@link Controller} container.
+   * @param {string} name The name of the Controller.
+   * @param {HTMLElement} [container] The container element to manage.
+   * @param {Object} targets A collection of arrays of HTML elements.
+   * @param {Object} [events] Functions to create event listeners.
+   * @param {Object} [methods] Methods to execute within the Controller container.
    */
-  constructor(props: Controller) {
-    this.container = Controller.assignContainer(props);
+  constructor(props: fw.IController) {
     this.name = props.name;
+    this.container = Controller.assignContainer(props);
     this.targets = props.targets || {};
     this.events = props.events || {};
     this.methods = props.methods || {};
@@ -76,7 +76,7 @@ export class Controller {
    *
    * @returns {fw.Container}
    */
-  private static assignContainer(props?: Controller): fw.Container {
+  private static assignContainer(props?: fw.IController): fw.Container {
     if (props.container) {
       return props.container;
     } else if (props.name) {
@@ -120,6 +120,7 @@ export class Controller {
     Controller.initEventListeners(events);
 
     return new ControllerApi({
+      name,
       container,
       targets,
       methods
