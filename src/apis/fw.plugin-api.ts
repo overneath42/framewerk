@@ -11,7 +11,7 @@ import { Plugin } from '../prototypes/fw.plugin';
  * An API for executing methods against an instance of {@link Plugin}.
  *
  * @class PluginApi
- * @since 0.1.0
+ * @since 1.0.0
  */
 export default class PluginApi {
   container?: HTMLElement;

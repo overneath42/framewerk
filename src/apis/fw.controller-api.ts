@@ -12,7 +12,7 @@ import { Controller } from '../prototypes/fw.controller';
  * within an instance of {@link Controller}.
  *
  * @implements {FramewerkApis.Controller}
- * @since 0.1.0
+ * @since 1.0.0
  */
 
 export default class ControllerApi {

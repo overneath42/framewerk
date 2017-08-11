@@ -12,7 +12,7 @@ import { dataSelector } from '../utils/fw.utils';
  * A generic prototype for creating a function which will
  * execute scripting within a specified container.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 export class Controller {
   public container?: fw.Container;

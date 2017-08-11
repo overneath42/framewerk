@@ -11,7 +11,7 @@ import PluginApi from '../apis/fw.plugin-api';
  * A generic prototype for wrapping a third-party plugin to allow
  * for a common execution pattern.
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 export class Plugin {
   public container: fw.Container;
@@ -52,7 +52,7 @@ export class Plugin {
   /**
    * Merges default and user options.
    *
-   * @since 0.1.0
+   * @since 1.0.0
    *
    * @static
    * @param {fw.ConfigObject} [defaultOptions = {}] Default options.
@@ -70,7 +70,7 @@ export class Plugin {
   /**
    * Determine if a function actually is a function.
    *
-   * @since 0.1.0
+   * @since 1.0.0
    *
    * @static
    * @param {*} object The object to test.
@@ -95,7 +95,7 @@ export class Plugin {
   /**
    * Initializes the {@link Plugin}.
    *
-   * @since 0.1.0
+   * @since 1.0.0
    *
    * @returns {PluginApi} Returns an instance of the API for interacting with the {@link Plugin}.
    */
@@ -112,7 +112,7 @@ export class Plugin {
   /**
    * Attempts to execute a {@link Plugin} method. Catches and logs any exceptions.
    *
-   * @since 0.1.0
+   * @since 1.0.0
    *
    * @param {Function} command The plugin method to execute.
    */

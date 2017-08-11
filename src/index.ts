@@ -19,7 +19,7 @@ interface ControllerList {
  * A framework for managing scripting on top of server-rendered pages.
  *
  * @class Framewerk
- * @since 0.1.0
+ * @since 1.0.0
  */
 function fw(controllers: ControllerList, plugins: Plugin[]) {
   return {
@@ -31,7 +31,7 @@ function fw(controllers: ControllerList, plugins: Plugin[]) {
   /**
    * Initialize the Framewerk package.
    *
-   * @since 0.1.0
+   * @since 1.0.0
    */
   function initialize() {
     const controllerKeys = Object.keys(controllers);
