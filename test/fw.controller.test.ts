@@ -25,8 +25,6 @@ describe('Controller', () => {
       const targets = targetsObject();
       const testResult = Controller.getTargets(targets);
 
-      debugger;
-
       expect((testResult.p as HTMLElement[]).length).to.equal(3);
     });
   });
