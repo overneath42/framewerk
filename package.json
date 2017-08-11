@@ -3,7 +3,7 @@
   "author": "Justin Toon",
   "version": "1.0.0-alpha.2",
   "description": "A framework for managing scripting on top of server-rendered pages.",
-  "main": "./src/index.ts",
+  "main": "dist/fw.min.ts",
   "types": "./typings.d.ts",
   "repository": "https://github.com/overneath42/framewerk.git",
   "keywords": [
@@ -11,7 +11,7 @@
     "framework"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/overneath42/datasink#readme",
+  "homepage": "https://github.com/overneath42/framewerk#readme",
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.0.2",
