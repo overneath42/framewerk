@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.3] - 2017-08-11
+### Changed
+- Fixed the issues link in `package.json`.
+- Changed the `main` field to point to the compiled JS.
+- Changed Webpack prod config so it doesn't compress the output. (This is likely temporary.)
+- Removed a debugger statement from a spec file.
+
+## [1.0.0-alpha.2] - 2017-08-11
+### Changed
+- Properly named module within definition file.
+
+## [1.0.0-alpha.1] - 2017-08-11
+### Changed
+- Bumped version number to allow NPM publishing.
+
 ## [0.1.3] - 2017-08-08
 ### Added
 - Added a check to the main `fw.initialize` method to only initialize a controller if the target `data-controller` container is found.
