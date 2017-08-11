@@ -1,5 +1,5 @@
 {
-  "name": "framewerk",
+  "name": "@overneath42/framewerk",
   "author": "Justin Toon",
   "version": "1.0.0-alpha.1",
   "description": "A framework for managing scripting on top of server-rendered pages.",
