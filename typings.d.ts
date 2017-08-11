@@ -3,7 +3,7 @@
 // Definitions by: Justin Toon <http://justintoon.com>
 // TypeScript Version: 2.4.2
 
-declare module 'framewerk' {
+declare module '@overneath42/framewerk' {
   interface ControllerList {
     [key: string]: () => Controller;
   }
