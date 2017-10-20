@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.6] - 2017-10-20
+### Changed
+- Minor reference fix in `Plugin`.
+
 ## [1.0.0-alpha.5] - 2017-10-20
 ### Changed
 - Adjust webpack build to export for library usage.
