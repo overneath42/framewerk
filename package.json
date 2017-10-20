@@ -1,9 +1,9 @@
 {
   "name": "@overneath42/framewerk",
   "author": "Justin Toon",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "A framework for managing scripting on top of server-rendered pages.",
-  "main": "dist/fw.min.ts",
+  "main": "dist/fw.min.js",
   "types": "./typings.d.ts",
   "repository": "https://github.com/overneath42/framewerk.git",
   "keywords": [
