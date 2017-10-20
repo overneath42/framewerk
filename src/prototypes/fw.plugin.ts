@@ -34,7 +34,7 @@ export class Plugin {
   constructor(props: fw.IPlugin) {
     this.plugin = props.plugin;
     this.container = props.container || document.querySelector('body');
-    this.target = props.container || document.querySelector('body');
+    this.target = props.target || document.querySelector('body');
     this.defaultOptions = props.defaultOptions || {};
     this.instanceOptions = props.instanceOptions || {};
     this.isJQueryPlugin = props.isJQueryPlugin || false;
