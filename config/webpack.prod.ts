@@ -10,11 +10,13 @@ const config = function(): webpack.Configuration {
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, '../dist'),
-      filename: 'fw.min.js'
+      filename: 'fw.js',
+      library: 'framewerk',
+      libraryTarget: 'umd',
+      umdNamedDefine: true
     },
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
-        compress: false,
         comments: false,
         mangle: false
       })

@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.5] - 2017-10-20
+### Changed
+- Adjust webpack build to export for library usage.
+
+## [1.0.0-alpha.4] - 2017-10-20
+### Changed
+- The version number. 😜
+
 ## [1.0.0-alpha.3] - 2017-08-11
 ### Changed
 - Fixed the issues link in `package.json`.
