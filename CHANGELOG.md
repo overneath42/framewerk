@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.7] - 2017-10-26
+### Changed
+- Add basic initialization code for `Plugin`.
+- `Controller.getTargets` always returns an array now.
+- Added a currently-unused utility function to automatically generate a list of targets
+  for `Controller.getTargets`.
+
 ## [1.0.0-alpha.6] - 2017-10-20
 ### Changed
 - Minor reference fix in `Plugin`.
