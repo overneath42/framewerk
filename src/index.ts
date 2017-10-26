@@ -12,7 +12,11 @@ import { Controller, Plugin } from './prototypes';
 import { dataSelector } from './utils/fw.utils';
 
 interface ControllerList {
-  [key: string]: () => Controller;
+  [key: string]: (container: fw.Container) => Controller;
+}
+
+interface PluginList {
+  [key: string]: (container: fw.Container) => Plugin;
 }
 
 /**
@@ -21,7 +25,11 @@ interface ControllerList {
  * @class Framewerk
  * @since 1.0.0
  */
-function fw(controllers: ControllerList, plugins: Plugin[]) {
+function fw(
+  controllers: ControllerList,
+  plugins?: Plugin[],
+  pluginTargets?: fw.ConfigObject
+) {
   return {
     initialize
   };
@@ -33,18 +41,30 @@ function fw(controllers: ControllerList, plugins: Plugin[]) {
    *
    * @since 1.0.0
    */
-  function initialize() {
+  function initialize(
+    container: fw.Container = document.querySelector('body')
+  ) {
     const controllerKeys = Object.keys(controllers);
 
     if (controllerKeys.length) {
       controllerKeys.forEach(name => {
         const selector = dataSelector('controller', name);
-        const container = document.querySelector(selector);
+        const controllerContainer = document.querySelector(selector);
 
-        if (container) {
-          controllers[name]().initialize();
+        if (controllerContainer) {
+          controllers[name](container).initialize();
         }
       });
+    }
+
+    if (plugins && pluginTargets) {
+      const pluginKeys = Object.keys(pluginTargets);
+
+      if (pluginKeys.length) {
+        pluginKeys.forEach(name => {
+          plugins[name](pluginTargets[name]);
+        });
+      }
     }
   }
 }
