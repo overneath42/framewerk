@@ -27,7 +27,7 @@ declare module '@overneath42/framewerk' {
 
     container?: fw.Container;
     plugin: Function;
-    target: fw.Container;
+    target: string;
     defaultOptions: fw.ConfigObject;
     instanceOptions: fw.ConfigObject;
     isJQueryPlugin: boolean;
@@ -99,11 +99,18 @@ declare namespace fw {
     methods?: MethodObject;
   }
 
-  interface IPlugin extends IPrototype {
+  interface IPluginPrototype extends IPrototype {
     plugin: Function;
-    target: Container;
-    defaultOptions?: Object;
-    instanceOptions?: Object;
+    target: string;
+  }
+
+  interface IPlugin extends IPluginPrototype {
+    defaultOptions?: ConfigObject;
+    instanceOptions?: ConfigObject;
     isJQueryPlugin: boolean;
+  }
+
+  interface IPluginApi extends IPluginPrototype {
+    options: ConfigObject;
   }
 }

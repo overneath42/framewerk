@@ -15,10 +15,10 @@ import PluginApi from '../apis/fw.plugin-api';
  */
 export class Plugin {
   public container: fw.Container;
-  public target: fw.Container;
+  public target: string;
   public plugin: Function;
-  public defaultOptions: Object;
-  public instanceOptions: Object;
+  public defaultOptions: fw.ConfigObject;
+  public instanceOptions: fw.ConfigObject;
   public isJQueryPlugin: boolean;
 
   /**
@@ -34,20 +34,12 @@ export class Plugin {
   constructor(props: fw.IPlugin) {
     this.plugin = props.plugin;
     this.container = props.container || document.querySelector('body');
-    this.target = props.target || document.querySelector('body');
+    this.target = props.target || 'body';
     this.defaultOptions = props.defaultOptions || {};
     this.instanceOptions = props.instanceOptions || {};
     this.isJQueryPlugin = props.isJQueryPlugin || false;
   }
 
-  public static foundElements(
-    selector: string,
-    container: HTMLElement
-  ): boolean {
-    if (!selector) return false;
-
-    return container.querySelectorAll(selector).length > 0;
-  }
 
   /**
    * Merges default and user options.
@@ -68,31 +60,6 @@ export class Plugin {
   }
 
   /**
-   * Determine if a function actually is a function.
-   *
-   * @since 1.0.0
-   *
-   * @static
-   * @param {*} object The object to test.
-   *
-   * @return {boolean} Returns `true` if it was a function.
-   */
-  private static isFunction(object: any): boolean {
-    return typeof object === 'function';
-  }
-
-  /**
-   * Determine if any instances of target element are located
-   * within a given container element.
-   *
-   * @static
-   * @param {string} selector The selector string to query for.
-   * @param {HTMLElement} container The container to search within.
-   *
-   * @returns {boolean}
-   */
-
-  /**
    * Initializes the {@link Plugin}.
    *
    * @since 1.0.0
@@ -104,31 +71,7 @@ export class Plugin {
       container: this.container,
       target: this.target,
       plugin: this.plugin,
-      isJQueryPlugin: this.isJQueryPlugin,
-      defaultOptions: Object
+      options: Plugin.prepareOptions(this.defaultOptions, this.instanceOptions)
     });
-  }
-
-  /**
-   * Attempts to execute a {@link Plugin} method. Catches and logs any exceptions.
-   *
-   * @since 1.0.0
-   *
-   * @param {Function} command The plugin method to execute.
-   */
-  public execute(command: Function) {
-    // make sure the provided command and the internally-initialized plugin
-    // are both executable functions
-    if ([this.plugin, command].every(Plugin.isFunction)) {
-      try {
-        // bind current context to the function…
-        command = command.bind(this);
-        // …and try it.
-        command();
-      } catch (error) {
-        // if it doesn't work, log the error and go on.
-        console.debug(error);
-      }
-    }
   }
 }
