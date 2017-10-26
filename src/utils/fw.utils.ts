@@ -64,3 +64,16 @@ export function dataSelector(attr: string, value?: string): string {
 export function camelToSnake(str: string) {
   return str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
 }
+
+/**
+ * Prepares a manifest of controller targets.
+ *
+ * @param {Object} targets A manifest of targets. The key should be the target name, the value the target element.
+ * @param {string} controllerName The name of the controller.
+ */
+export function prepareTargets(controllerName: string, targets: fw.ConfigObject): fw.ConfigObject {
+  return Object.keys(targets).reduce((final, targetName) => {
+    final[targetName] = `${targets[targetName]}[data-${controllerName}-${camelToSnake(targetName)}]`;
+    return final;
+  }, {});
+}
