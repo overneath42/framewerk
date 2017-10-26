@@ -17,9 +17,7 @@ declare module '@overneath42/framewerk' {
     events?: fw.MethodObject;
     methods: fw.MethodObject;
 
-    static getTargets(
-      targets?: fw.ConfigObject
-    ): fw.TargetsObject;
+    static getTargets(targets?: fw.ConfigObject): fw.TargetsObject;
     initialize(): void;
     createEvents(): void;
   }

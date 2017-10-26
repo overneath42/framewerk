@@ -55,8 +55,7 @@ export class Controller {
           targets[key] as string
         ) as NodeListOf<HTMLElement>;
 
-        selectedElements[key] =
-          selected.length === 1 ? selected.item(0) : [].slice.call(selected);
+        selectedElements[key] = [].slice.call(selected);
       });
     }
 
