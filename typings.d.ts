@@ -73,7 +73,7 @@ declare namespace fw {
   type Container = HTMLElement | HTMLBodyElement;
 
   interface ConfigObject {
-    [key: string]: string | Function;
+    [key: string]: any;
   }
 
   interface MethodObject {
@@ -81,7 +81,7 @@ declare namespace fw {
   }
 
   interface TargetsObject {
-    [key: string]: HTMLElement | HTMLElement[];
+    [key: string]: HTMLElement[];
   }
 
   interface NodeListObject<T extends HTMLElement> {
