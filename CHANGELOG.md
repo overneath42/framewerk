@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.8] - 2018-1-5
+### Changed
+- Primary `fw.initialize()` command now properly honors provided container for limiting
+  scope of script execution.
+- `Controller.getTargets` allows for limited scope via a second argument which accepts
+  a DOM element.
+
 ## [1.0.0-alpha.7] - 2017-10-26
 ### Changed
 - Add basic initialization code for `Plugin`.
