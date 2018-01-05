@@ -65,7 +65,7 @@ declare module '@overneath42/framewerk' {
     controllers?: ControllerList,
     plugins?: Plugin[]
   ): {
-    initialize(): void;
+    initialize(container?: fw.Container): void;
   };
 }
 

@@ -46,14 +46,17 @@ export class Controller {
    *
    * @returns {Object}
    */
-  public static getTargets(targets?: fw.ConfigObject): fw.TargetsObject {
+  public static getTargets(
+    targets?: fw.ConfigObject,
+    container: fw.Container = document.documentElement
+  ): fw.TargetsObject {
     let selectedElements: fw.TargetsObject = {};
 
     if (targets) {
       Object.keys(targets).forEach((key: string) => {
-        const selected = document.querySelectorAll(
-          targets[key] as string
-        ) as NodeListOf<HTMLElement>;
+        const selected = container.querySelectorAll(targets[
+          key
+        ] as string) as NodeListOf<HTMLElement>;
 
         selectedElements[key] = [].slice.call(selected);
       });

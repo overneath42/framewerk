@@ -41,15 +41,13 @@ function fw(
    *
    * @since 1.0.0
    */
-  function initialize(
-    container: fw.Container = document.querySelector('body')
-  ) {
+  function initialize(container: fw.Container = document.documentElement) {
     const controllerKeys = Object.keys(controllers);
 
     if (controllerKeys.length) {
       controllerKeys.forEach(name => {
         const selector = dataSelector('controller', name);
-        const controllerContainer = document.querySelector(selector);
+        const controllerContainer = container.querySelector(selector);
 
         if (controllerContainer) {
           controllers[name](container).initialize();
